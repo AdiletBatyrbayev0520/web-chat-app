@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Send, Globe, Clock, Database, User, Bot, AlertCircle, CheckCircle, BookOpen, GraduationCap } from 'lucide-react';
+import { Send, Globe, Clock, Database, User, Bot, AlertCircle, CheckCircle, BookOpen} from 'lucide-react';
 
 const BedrockQAApp = () => {
   const [messages, setMessages] = useState([]);
@@ -275,41 +275,44 @@ const BedrockQAApp = () => {
     }
   };
 
+  // Custom SDU blue color
+  const sduBlue = '#212153';
+  const sduOrange = '#f3a366';
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-orange-50 p-4">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-orange-50 p-4">
       {/* SDU Background Pattern */}
       <div className="fixed inset-0 opacity-5 pointer-events-none">
-        <div className="absolute top-10 left-10 w-32 h-32 bg-blue-600 rounded-full blur-3xl"></div>
+        <div className="absolute top-10 left-10 w-32 h-32 rounded-full blur-3xl" style={{ backgroundColor: sduBlue }}></div>
         <div className="absolute top-40 right-20 w-24 h-24 bg-orange-400 rounded-full blur-2xl"></div>
-        <div className="absolute bottom-20 left-1/4 w-40 h-40 bg-blue-800 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-20 left-1/4 w-40 h-40 rounded-full blur-3xl" style={{ backgroundColor: sduBlue }}></div>
         <div className="absolute bottom-40 right-1/3 w-28 h-28 bg-orange-500 rounded-full blur-2xl"></div>
       </div>
 
       <div className="relative max-w-6xl mx-auto">
         {/* Header with SDU Branding */}
-        <div className="bg-white rounded-2xl shadow-2xl p-8 mb-8 border-t-4 border-blue-600">
+        <div className="bg-white rounded-2xl shadow-2xl p-8 mb-8" style={{ borderTop: `4px solid ${sduBlue}` }}>
           {/* SDU Logo Area */}
           <div className="flex items-center justify-between mb-6">
             <div className="flex items-center space-x-6">
               {/* Custom SDU Logo */}
               <div className="relative">
-                <div className="w-20 h-20 bg-gradient-to-br from-blue-600 to-blue-800 rounded-2xl flex items-center justify-center shadow-lg">
+                <div className="w-20 h-20 rounded-2xl flex items-center justify-center shadow-lg" style={{ background: `linear-gradient(to bottom right, ${sduBlue}, ${sduBlue}dd)` }}>
                   {/* Shanyrak-inspired design with wings */}
                   <div className="relative">
                     <BookOpen className="w-8 h-8 text-white" />
-                    <div className="absolute -top-1 -left-2 w-3 h-3 bg-orange-400 rounded-full"></div>
-                    <div className="absolute -top-1 -right-2 w-3 h-3 bg-orange-400 rounded-full"></div>
+                    <div className="absolute -top-1 -left-2 w-3 h-3 rounded-full" style={{ backgroundColor: sduOrange }}></div>
+                    <div className="absolute -top-1 -right-2 w-3 h-3 rounded-full" style={{ backgroundColor: sduOrange }}></div>
                   </div>
                 </div>
                 {/* Light orange rhombus */}
-                <div className="absolute -bottom-1 -right-1 w-6 h-6 bg-orange-400 transform rotate-45 rounded-sm shadow-md"></div>
+                <div className="absolute -bottom-1 -right-1 w-6 h-6 transform rotate-45 rounded-sm shadow-md" style={{ backgroundColor: sduOrange }}></div>
               </div>
               
               <div>
                 <h1 className="text-3xl font-bold text-gray-800 mb-1">
                   {currentText.title}
                 </h1>
-                <p className="text-lg text-blue-600 font-medium mb-2">
+                <p className="text-lg font-medium mb-2" style={{ color: sduBlue }}>
                   {currentText.subtitle}
                 </p>
                 <div className="flex items-center space-x-3 text-sm">
@@ -325,11 +328,23 @@ const BedrockQAApp = () => {
             
             {/* Language Selector with SDU Colors */}
             <div className="flex items-center space-x-3">
-              <Globe className="w-5 h-5 text-blue-600" />
+              <Globe className="w-5 h-5" style={{ color: sduBlue }} />
               <select
                 value={language}
                 onChange={(e) => setLanguage(e.target.value)}
-                className="px-4 py-2 border-2 border-blue-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white text-gray-700 font-medium"
+                className="px-4 py-2 rounded-lg bg-white text-gray-700 font-medium"
+                style={{ 
+                  border: `2px solid ${sduBlue}30`,
+                  outline: 'none'
+                }}
+                onFocus={(e) => {
+                  e.target.style.borderColor = sduBlue;
+                  e.target.style.boxShadow = `0 0 0 3px ${sduBlue}20`;
+                }}
+                onBlur={(e) => {
+                  e.target.style.borderColor = `${sduBlue}30`;
+                  e.target.style.boxShadow = 'none';
+                }}
               >
                 {Object.entries(languages).map(([code, lang]) => (
                   <option key={code} value={code}>
@@ -342,13 +357,26 @@ const BedrockQAApp = () => {
 
           {/* User ID Input with SDU styling */}
           <div className="flex items-center space-x-3 mb-4">
-            <User className="w-5 h-5 text-blue-600" />
+            <User className="w-5 h-5" style={{ color: sduBlue }} />
             <input
               type="text"
               value={userId}
               onChange={(e) => setUserId(e.target.value)}
               placeholder={currentText.userIdPlaceholder}
-              className="flex-1 px-4 py-3 border-2 border-blue-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-blue-50"
+              className="flex-1 px-4 py-3 rounded-lg"
+              style={{ 
+                border: `2px solid ${sduBlue}30`,
+                backgroundColor: `${sduBlue}08`,
+                outline: 'none'
+              }}
+              onFocus={(e) => {
+                e.target.style.borderColor = sduBlue;
+                e.target.style.boxShadow = `0 0 0 3px ${sduBlue}20`;
+              }}
+              onBlur={(e) => {
+                e.target.style.borderColor = `${sduBlue}30`;
+                e.target.style.boxShadow = 'none';
+              }}
             />
           </div>
 
@@ -363,99 +391,129 @@ const BedrockQAApp = () => {
 
         {/* Chat Messages with SDU styling */}
         <div className="bg-white rounded-2xl shadow-2xl mb-8" style={{ height: '500px' }}>
-          <div className="h-full overflow-y-auto p-6 space-y-4">
-            {messages.length === 0 ? (
-              <div className="text-center text-gray-500 py-16">
-                <div className="w-24 h-24 bg-gradient-to-br from-blue-100 to-orange-100 rounded-full flex items-center justify-center mx-auto mb-6">
-                  <GraduationCap className="w-12 h-12 text-blue-600" />
+          <div className="h-full overflow-y-auto p-6 space-y-4 relative">
+            {/* Background Image Container */}
+            <div 
+              style={{
+                position: 'absolute',
+                inset: 0,
+                backgroundImage: 'url(https://sdu.edu.kz/wp-content/uploads/2023/08/logo-1024x1016.png)',
+                backgroundSize: '300px 300px',
+                backgroundPosition: 'center center',
+                backgroundRepeat: 'no-repeat',
+                backgroundAttachment: 'fixed',
+                opacity: 0.1,
+                pointerEvents: 'none',
+                zIndex: 0
+              }}
+            />
+            
+            {/* Content Container */}
+            <div style={{ position: 'relative', zIndex: 1 }}>
+              {messages.length === 0 ? (
+                <div className="text-center text-gray-500 py-16">
+                  <div className="w-24 h-24 rounded-full flex items-center justify-center mx-auto mb-6 overflow-hidden" style={{ background: `linear-gradient(to bottom right, ${sduBlue}20, #FFA50020)` }}>
+                    <img 
+                      src="https://scontent.fala6-1.fna.fbcdn.net/v/t39.30808-6/396010554_810707741060773_3844701626438101860_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=3hRhBeTzF4EQ7kNvwEjcZL5&_nc_oc=Adn5KSPRawhCYfrLl0sRk_N3JavsXNf_ZZWmJVssGrkUL17u9NU8YABW3MVm6sp0CIY&_nc_zt=23&_nc_ht=scontent.fala6-1.fna&_nc_gid=lT7GPAYCaJGUwTjm9PNqfQ&oh=00_AfP7Yg9bEymOHXferx9UTKNJ7naFyaeef3bRKe9lhxAnxQ&oe=68478461"
+                      alt="SDU Logo"
+                      className="w-full h-full object-cover rounded-full"
+                    />
+                  </div>
+                  <h3 className="text-xl font-semibold text-gray-700 mb-2">Welcome to SDU Knowledge Base!</h3>
+                  <p className="text-gray-500 max-w-md mx-auto leading-relaxed">
+                    {currentText.welcomeMessage}
+                  </p>
+                  <div className="mt-6 flex justify-center space-x-4 text-sm text-gray-400">
+                    <span>• Academics</span>
+                    <span>• Admissions</span>
+                    <span>• Campus Life</span>
+                    <span>• Research</span>
+                  </div>
                 </div>
-                <h3 className="text-xl font-semibold text-gray-700 mb-2">Welcome to SDU Knowledge Base!</h3>
-                <p className="text-gray-500 max-w-md mx-auto leading-relaxed">
-                  {currentText.welcomeMessage}
-                </p>
-                <div className="mt-6 flex justify-center space-x-4 text-sm text-gray-400">
-                  <span>• Academics</span>
-                  <span>• Admissions</span>
-                  <span>• Campus Life</span>
-                  <span>• Research</span>
-                </div>
-              </div>
-            ) : (
-              messages.map((message) => (
-                <div
-                  key={message.id}
-                  className={`flex ${message.type === 'user' ? 'justify-end' : 'justify-start'}`}
-                >
+              ) : (
+                messages.map((message) => (
                   <div
-                    className={`max-w-4xl rounded-2xl p-5 shadow-lg ${
-                      message.type === 'user'
-                        ? 'bg-gradient-to-r from-blue-600 to-blue-700 text-white'
-                        : message.type === 'error'
-                        ? 'bg-red-50 border-l-4 border-red-500 text-red-700'
-                        : 'bg-gradient-to-r from-gray-50 to-blue-50 border border-blue-200'
-                    }`}
+                    key={message.id}
+                    className={`flex ${message.type === 'user' ? 'justify-end' : 'justify-start'}`}
                   >
-                    <div className="flex items-start space-x-3">
-                      {message.type === 'user' ? (
-                        <div className="w-8 h-8 bg-white bg-opacity-20 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
-                          <User className="w-4 h-4" />
-                        </div>
-                      ) : message.type === 'error' ? (
-                        <AlertCircle className="w-6 h-6 flex-shrink-0 mt-1" />
-                      ) : (
-                        <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
-                          <Bot className="w-4 h-4 text-white" />
-                        </div>
-                      )}
-                      <div className="flex-1">
-                        <p className="whitespace-pre-wrap leading-relaxed">{message.content}</p>
-                        
-                        {/* Sources and Cache Info for SDU */}
-                        {message.type === 'bot' && (
-                          <div className="mt-4 pt-4 border-t border-blue-200">
-                            {/* Cache Status */}
-                            {message.cached && (
-                              <div className="flex items-center space-x-2 text-sm text-green-600 mb-3">
-                                <CheckCircle className="w-4 h-4" />
-                                <span className="font-medium">{currentText.cached}</span>
-                              </div>
-                            )}
-                            
-                            {/* Sources */}
-                            <div className="text-sm text-gray-600">
-                              <div className="flex items-center space-x-2 mb-2">
-                                <Database className="w-4 h-4 text-blue-600" />
-                                <span className="font-semibold text-blue-700">{currentText.sources}</span>
-                              </div>
-                              {message.sources && message.sources.length > 0 ? (
-                                <ul className="list-none ml-6 space-y-1">
-                                  {message.sources.map((source, index) => (
-                                    <li key={index} className="flex items-center space-x-2">
-                                      <div className="w-1.5 h-1.5 bg-orange-400 rounded-full flex-shrink-0"></div>
-                                      <span className="text-gray-600">{source}</span>
-                                    </li>
-                                  ))}
-                                </ul>
-                              ) : (
-                                <p className="ml-6 text-gray-400 italic">{currentText.noSources}</p>
-                              )}
-                            </div>
+                    <div
+                      className={`max-w-4xl rounded-2xl p-5 shadow-lg ${
+                        message.type === 'user'
+                          ? 'text-white'
+                          : message.type === 'error'
+                          ? 'bg-red-50 border-l-4 border-red-500 text-red-700'
+                          : 'border'
+                      }`}
+                      style={
+                        message.type === 'user'
+                          ? { background: `linear-gradient(to right, ${sduBlue}, ${sduBlue}ee)` }
+                          : message.type === 'bot'
+                          ? { background: `linear-gradient(to right, #f9fafb, ${sduBlue}08)`, borderColor: `${sduBlue}30` }
+                          : {}
+                      }
+                    >
+                      <div className="flex items-start space-x-3">
+                        {message.type === 'user' ? (
+                          <div className="w-8 h-8 bg-white bg-opacity-20 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                            <User className="w-4 h-4" />
+                          </div>
+                        ) : message.type === 'error' ? (
+                          <AlertCircle className="w-6 h-6 flex-shrink-0 mt-1" />
+                        ) : (
+                          <div className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 mt-1" style={{ background: `linear-gradient(to bottom right, ${sduBlue}, ${sduBlue}dd)` }}>
+                            <Bot className="w-4 h-4 text-white" />
                           </div>
                         )}
-                        
-                        <div className="flex items-center justify-between mt-3">
-                          <div className="flex items-center space-x-1 text-xs opacity-70">
-                            <Clock className="w-3 h-3" />
-                            <span>{message.timestamp}</span>
+                        <div className="flex-1">
+                          <p className="whitespace-pre-wrap leading-relaxed">{message.content}</p>
+                          
+                          {/* Sources and Cache Info for SDU */}
+                          {message.type === 'bot' && (
+                            <div className="mt-4 pt-4" style={{ borderTop: `1px solid ${sduBlue}30` }}>
+                              {/* Cache Status */}
+                              {message.cached && (
+                                <div className="flex items-center space-x-2 text-sm text-green-600 mb-3">
+                                  <CheckCircle className="w-4 h-4" />
+                                  <span className="font-medium">{currentText.cached}</span>
+                                </div>
+                              )}
+                              
+                              {/* Sources */}
+                              <div className="text-sm text-gray-600">
+                                <div className="flex items-center space-x-2 mb-2">
+                                  <Database className="w-4 h-4" style={{ color: sduBlue }} />
+                                  <span className="font-semibold" style={{ color: sduBlue }}>{currentText.sources}</span>
+                                </div>
+                                {message.sources && message.sources.length > 0 ? (
+                                  <ul className="list-none ml-6 space-y-1">
+                                    {message.sources.map((source, index) => (
+                                      <li key={index} className="flex items-center space-x-2">
+                                        <div className="w-1.5 h-1.5 bg-orange-400 rounded-full flex-shrink-0"></div>
+                                        <span className="text-gray-600">{source}</span>
+                                      </li>
+                                    ))}
+                                  </ul>
+                                ) : (
+                                  <p className="ml-6 text-gray-400 italic">{currentText.noSources}</p>
+                                )}
+                              </div>
+                            </div>
+                          )}
+                          
+                          <div className="flex items-center justify-between mt-3">
+                            <div className="flex items-center space-x-1 text-xs opacity-70">
+                              <Clock className="w-3 h-3" />
+                              <span>{message.timestamp}</span>
+                            </div>
                           </div>
                         </div>
                       </div>
                     </div>
                   </div>
-                </div>
-              ))
-            )}
-            <div ref={messagesEndRef} />
+                ))
+              )}
+              <div ref={messagesEndRef} />
+            </div>
           </div>
         </div>
 
@@ -467,14 +525,36 @@ const BedrockQAApp = () => {
               onChange={(e) => setQuestion(e.target.value)}
               onKeyPress={handleKeyPress}
               placeholder={placeholders[language]}
-              className="flex-1 px-6 py-4 border-2 border-blue-200 rounded-xl resize-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-blue-50 text-gray-700 placeholder-gray-500"
+              className="flex-1 px-6 py-4 rounded-xl resize-none text-gray-700 placeholder-gray-500"
+              style={{ 
+                border: `2px solid ${sduBlue}30`,
+                backgroundColor: `${sduBlue}08`,
+                outline: 'none'
+              }}
+              onFocus={(e) => {
+                e.target.style.borderColor = sduBlue;
+                e.target.style.boxShadow = `0 0 0 3px ${sduBlue}20`;
+              }}
+              onBlur={(e) => {
+                e.target.style.borderColor = `${sduBlue}30`;
+                e.target.style.boxShadow = 'none';
+              }}
               rows="3"
               disabled={isLoading}
             />
             <button
               onClick={sendQuestion}
               disabled={isLoading || !question.trim() || !userId.trim()}
-              className="px-8 py-4 bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-xl hover:from-blue-700 hover:to-blue-800 disabled:opacity-50 disabled:cursor-not-allowed flex items-center space-x-3 transition-all duration-200 shadow-lg font-medium"
+              className="px-8 py-4 text-white rounded-xl disabled:opacity-50 disabled:cursor-not-allowed flex items-center space-x-3 transition-all duration-200 shadow-lg font-medium"
+              style={{ 
+                background: `linear-gradient(to right, ${sduBlue}, ${sduBlue}dd)`,
+              }}
+              onMouseEnter={(e) => {
+                e.target.style.background = `linear-gradient(to right, ${sduBlue}dd, ${sduBlue}bb)`;
+              }}
+              onMouseLeave={(e) => {
+                e.target.style.background = `linear-gradient(to right, ${sduBlue}, ${sduBlue}dd)`;
+              }}
             >
               {isLoading ? (
                 <>
