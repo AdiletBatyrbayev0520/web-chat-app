@@ -312,7 +312,7 @@ const BedrockQAApp = () => {
   const sduOrange = '#f3a366';
   
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-orange-50 p-2 sm:p-4">
+    <div className="min-h-screen bg-gradient-to-br from-cyan-50 via-sky-100 to-orange-50 p-2 sm:p-4">
       {/* SDU Background Pattern - Hidden on mobile for performance */}
       <div className="hidden sm:block fixed inset-0 opacity-5 pointer-events-none">
         <div className="absolute top-10 left-10 w-32 h-32 rounded-full blur-3xl" style={{ backgroundColor: sduBlue }}></div>
