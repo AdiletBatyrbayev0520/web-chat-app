@@ -10,8 +10,10 @@ const BedrockQAApp = () => {
   const [error, setError] = useState('');
   const [connectionStatus, setConnectionStatus] = useState('disconnected');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [scrollOffset, setScrollOffset] = useState(0);
   
   const messagesEndRef = useRef(null);
+  const chatContainerRef = useRef(null);
   const API_ENDPOINT = 'https://lzompyihsttpv2dyqbrkahgyny0ujqll.lambda-url.us-east-1.on.aws/ask';
 
   const languages = {
@@ -92,6 +94,39 @@ const BedrockQAApp = () => {
       setUserId(`sdu_user_${Math.random().toString(36).substr(2, 9)}`);
     }
   }, [userId]);
+
+  // Handle scroll for parallax effect
+  useEffect(() => {
+    let animationFrameId;
+    
+    const handleScroll = () => {
+      if (animationFrameId) {
+        cancelAnimationFrame(animationFrameId);
+      }
+      
+      animationFrameId = requestAnimationFrame(() => {
+        if (chatContainerRef.current) {
+          const scrollTop = chatContainerRef.current.scrollTop;
+          const maxScroll = chatContainerRef.current.scrollHeight - chatContainerRef.current.clientHeight;
+          const scrollProgress = scrollTop / maxScroll;
+          
+          // Calculate offset based on scroll progress for smoother movement
+          setScrollOffset(scrollTop * 0.15); // Subtle movement for smooth effect
+        }
+      });
+    };
+
+    const container = chatContainerRef.current;
+    if (container) {
+      container.addEventListener('scroll', handleScroll, { passive: true });
+      return () => {
+        container.removeEventListener('scroll', handleScroll);
+        if (animationFrameId) {
+          cancelAnimationFrame(animationFrameId);
+        }
+      };
+    }
+  }, []);
 
   // Scroll to bottom when new messages arrive
   useEffect(() => {
@@ -431,27 +466,30 @@ const BedrockQAApp = () => {
         </div>
 
         {/* Chat Messages with SDU styling - Mobile Optimized */}
-        <div className="bg-white rounded-xl sm:rounded-2xl shadow-lg sm:shadow-2xl mb-4 sm:mb-8" style={{ height: 'calc(100vh - 340px)', minHeight: '300px', maxHeight: '500px' }}>
-          <div className="h-full overflow-y-auto p-3 sm:p-6 space-y-3 sm:space-y-4 relative">
-            {/* Background Image Container */}
-            <div 
-              className="hidden sm:block"
-              style={{
-                position: 'absolute',
-                inset: 0,
-                backgroundImage: 'url(https://sdu.edu.kz/wp-content/uploads/2023/08/logo-1024x1016.png)',
-                backgroundSize: '300px 300px',
-                backgroundPosition: 'center center',
-                backgroundRepeat: 'no-repeat',
-                backgroundAttachment: 'fixed',
-                opacity: 0.3,
-                pointerEvents: 'none',
-                zIndex: 0
-              }}
-            />
-            
-            {/* Content Container */}
-            <div style={{ position: 'relative', zIndex: 1 }}>
+        <div className="bg-white rounded-xl sm:rounded-2xl shadow-lg sm:shadow-2xl mb-4 sm:mb-8 overflow-hidden" style={{ height: 'calc(100vh - 340px)', minHeight: '300px', maxHeight: '500px', position: 'relative' }}>
+          {/* Fixed background that's always visible */}
+          <div 
+            style={{
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              right: 0,
+              bottom: 0,
+              backgroundImage: 'url(https://sdu.edu.kz/wp-content/uploads/2023/08/logo-1024x1016.png)',
+              backgroundSize: '250px 250px',
+              backgroundPosition: `center calc(50% - ${scrollOffset * 0}px)`,
+              backgroundRepeat: 'no-repeat',
+              opacity: 0.20,
+              pointerEvents: 'none',
+              zIndex: 1,
+              willChange: 'background-position',
+              transition: 'background-position 0.1s ease-out'
+            }}
+            className="sm:opacity-10"
+          />
+          
+          <div ref={chatContainerRef} className="h-full overflow-y-auto p-3 sm:p-6 relative z-10">
+            <div className="space-y-3 sm:space-y-4">
               {messages.length === 0 ? (
                 <div className="text-center text-gray-500 py-8 sm:py-16">
                   <div className="w-16 h-16 sm:w-24 sm:h-24 rounded-full flex items-center justify-center mx-auto mb-4 sm:mb-6 overflow-hidden" style={{ background: `linear-gradient(to bottom right, ${sduBlue}20, #FFA50020)` }}>
