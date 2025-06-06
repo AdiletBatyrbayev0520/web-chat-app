@@ -107,11 +107,7 @@ const BedrockQAApp = () => {
       animationFrameId = requestAnimationFrame(() => {
         if (chatContainerRef.current) {
           const scrollTop = chatContainerRef.current.scrollTop;
-          const maxScroll = chatContainerRef.current.scrollHeight - chatContainerRef.current.clientHeight;
-          const scrollProgress = scrollTop / maxScroll;
-          
-          // Calculate offset based on scroll progress for smoother movement
-          setScrollOffset(scrollTop * 0.15); // Subtle movement for smooth effect
+          setScrollOffset(scrollTop * 0.15); 
         }
       });
     };
