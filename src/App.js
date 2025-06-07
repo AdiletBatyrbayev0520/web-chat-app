@@ -471,7 +471,7 @@ const BedrockQAApp = () => {
               left: 0,
               right: 0,
               bottom: 0,
-              backgroundImage: 'url(https://sdu.edu.kz/wp-content/uploads/2023/08/logo-1024x1016.png)',
+              backgroundImage: 'url(https://sdu-bot-web-app-elements-bucket.s3.us-east-1.amazonaws.com/logo-1024x1016.png)',
               backgroundSize: 'min(250px, 40vw) min(250px, 40vw)',
               backgroundPosition: `center calc(50% - ${scrollOffset * 0}px)`,
               backgroundRepeat: 'no-repeat',
