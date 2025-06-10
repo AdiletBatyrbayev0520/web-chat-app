@@ -14,7 +14,7 @@ const BedrockQAApp = () => {
   
   const messagesEndRef = useRef(null);
   const chatContainerRef = useRef(null);
-  const API_ENDPOINT = 'https://lzompyihsttpv2dyqbrkahgyny0ujqll.lambda-url.us-east-1.on.aws/ask';
+  const API_ENDPOINT = 'https://lzompyihsttpv2dyqbrkahgyny0ujqll.lambda-url.us-east-1.on.aws/';
 
   const languages = {
     'en': { name: 'English', flag: '🇺🇸' },
@@ -140,8 +140,7 @@ const BedrockQAApp = () => {
       console.log('Testing connection to:', API_ENDPOINT);
       
       // Test with a simple GET request to root for documentation
-      const testUrl = 'https://lzompyihsttpv2dyqbrkahgyny0ujqll.lambda-url.us-east-1.on.aws/'
-      const response = await fetch(testUrl, {
+      const response = await fetch(API_ENDPOINT, {
         method: 'GET',
       });
       
