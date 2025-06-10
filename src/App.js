@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Send, Globe, Clock, Database, User, Bot, AlertCircle, CheckCircle, BookOpen, Menu, X } from 'lucide-react';
+import TextFormatter from './components/TextFormatter';
 
 const BedrockQAApp = () => {
   const [messages, setMessages] = useState([]);
@@ -540,7 +541,13 @@ const BedrockQAApp = () => {
                           </div>
                         )}
                         <div className="flex-1 min-w-0">
-                          <p className="whitespace-pre-wrap leading-relaxed break-words">{message.content}</p>
+                          {message.type === 'bot' ? (
+                            <TextFormatter text={message.content} className="leading-relaxed" />
+                          ) : (
+                            <p className="whitespace-pre-wrap leading-relaxed break-words">
+                              {message.content}
+                            </p>
+                          )}
                           
                           {/* Sources and Cache Info for SDU */}
                           {message.type === 'bot' && (
