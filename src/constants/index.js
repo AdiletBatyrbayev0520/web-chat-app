@@ -5,6 +5,11 @@ export const SDU_COLORS = {
   orange: '#f3a366'
 };
 
+export const IMAGE_SOURCES = {
+  sduLogoSource: "https://sdu-bot-web-app-elements-bucket.s3.us-east-1.amazonaws.com/sdu_logo.jpg",
+  backgroundImage: "https://sdu-bot-web-app-elements-bucket.s3.us-east-1.amazonaws.com/logo-1024x1016.png"
+}
+
 export const LANGUAGES = {
   'en': { name: 'English', flag: '🇺🇸' },
   'es': { name: 'Español', flag: '🇪🇸' },
