@@ -50,7 +50,7 @@ export const createBotMessage = (data) => ({
   sources: data.sources || [],
   cacheStatus: data.cache_status,
   cacheType: data.cache_type,
-  cached: data.cache_status === 'hit'
+  cached: data.cache_status === 'hit' || data.cache_status === 'partial'
 });
 
 export const createUserMessage = (question) => ({
