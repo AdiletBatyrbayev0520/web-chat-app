@@ -1,4 +1,4 @@
-export const API_ENDPOINT = 'https://lzompyihsttpv2dyqbrkahgyny0ujqll.lambda-url.us-east-1.on.aws/';
+export const API_ENDPOINT = 'https://mqvf0rd7n1.execute-api.eu-central-1.amazonaws.com/default/SDUChatBot/';
 
 export const SDU_COLORS = {
   blue: '#212153',

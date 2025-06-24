@@ -1,10 +1,9 @@
 import { API_ENDPOINT } from '../constants';
 
-export const sendQuestionToAPI = async (question, userId, language) => {
+export const sendQuestionToAPI = async (question, userId) => {
   const requestBody = {
     question: question,
-    user_id: userId,
-    language: language
+    user_id: userId
   };
 
   console.log('Sending request to:', API_ENDPOINT);

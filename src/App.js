@@ -72,7 +72,7 @@ const BedrockQAApp = () => {
 
     try {
       // Send question to API
-      const data = await sendQuestionToAPI(currentQuestion, userId, language);
+      const data = await sendQuestionToAPI(currentQuestion, userId);
       
       // Create and add bot message
       const botMessage = createBotMessage(data);
